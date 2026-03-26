@@ -1,0 +1,498 @@
+/* ============================================================
+   SOCIAL SOUP — GLOBAL SHARED STYLESHEET
+   styles.css  |  All pages link to this file
+   ============================================================ */
+
+/* ── Google Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap');
+
+/* ============================================================
+   1. CSS CUSTOM PROPERTIES (brand tokens)
+   ============================================================ */
+:root {
+  /* Brand colours */
+  --acid-yellow:   #D4FF00;
+  --hot-pink:      #FF2D9C;
+  --electric-blue: #00D4FF;
+  --true-black:    #000000;
+  --off-white:     #F5F5F0;
+  --white:         #FFFFFF;
+  --muted-grey:    #555555;
+
+  /* Typography */
+  --font-display: 'Bebas Neue', 'Anton', sans-serif;
+  --font-body:    'DM Sans', 'Manrope', sans-serif;
+
+  /* Spacing scale */
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  2rem;
+  --space-lg:  4rem;
+  --space-xl:  8rem;
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 100px;
+
+  /* Nav height */
+  --nav-height: 68px;
+}
+
+/* ============================================================
+   2. BASE RESET & TYPOGRAPHY
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--true-black);
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul { list-style: none; }
+
+/* ============================================================
+   3. ACCESSIBILITY
+   ============================================================ */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  background: var(--acid-yellow);
+  color: var(--true-black);
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+  z-index: 9999;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 0; }
+
+/* ============================================================
+   4. CUSTOM CURSOR
+   ============================================================ */
+.custom-cursor {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--acid-yellow);
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: background 0.2s, transform 0.1s;
+  mix-blend-mode: difference;
+}
+.custom-cursor.large { transform: translate(-50%, -50%) scale(3); }
+
+/* ============================================================
+   5. SCROLL REVEAL
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   6. NAVIGATION — shared across all pages
+   ============================================================ */
+#site-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: var(--nav-height);
+  padding: 0 4vw;
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 1.25rem;
+  background: #1a1a1a;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+#site-nav.scrolled {
+  background: var(--true-black);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.08em;
+  color: var(--white);
+  flex-shrink: 0;
+}
+
+.nav-mid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+.nav-links a {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+.nav-links a:hover,
+.nav-links a.active { color: var(--acid-yellow); }
+
+.nav-div {
+  width: 1px;
+  height: 22px;
+  background: rgba(255,255,255,0.18);
+  flex-shrink: 0;
+}
+
+.nav-pills {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.nav-pill {
+  height: 28px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: var(--font-body);
+  letter-spacing: 0.04em;
+  padding: 0 12px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.2s, outline-color 0.2s;
+}
+.nav-pill:hover { opacity: 0.85; }
+.pill-co { background: #FF2D9C; color: #111; }
+.pill-cr { background: #00D4FF; color: #111; }
+.pill-br { background: var(--acid-yellow); color: #111; }
+
+/* Active pill highlight — set per-page via JS */
+.nav-pill.active {
+  outline: 2px solid rgba(255,255,255,0.5);
+  outline-offset: 2px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.nav-contact-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.65);
+  transition: color 0.2s;
+  flex-shrink: 0;
+}
+.nav-contact-icon:hover { color: var(--acid-yellow); }
+
+/* Hamburger */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+.nav-hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  transition: transform 0.3s, opacity 0.3s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile fullscreen nav */
+.nav-mobile {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--true-black);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+}
+.nav-mobile.open { display: flex; }
+.nav-mobile a {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  letter-spacing: 0.05em;
+  color: var(--white);
+  transition: color 0.2s;
+}
+.nav-mobile a:hover { color: var(--acid-yellow); }
+
+/* ============================================================
+   7. TRIPLE COLOUR BAND
+   ============================================================ */
+.triple-band {
+  display: flex;
+  height: 6px;
+  flex-shrink: 0;
+}
+.triple-band div { flex: 1; }
+.band-yellow { background: var(--acid-yellow); }
+.band-pink   { background: var(--hot-pink); }
+.band-blue   { background: var(--electric-blue); }
+
+/* ============================================================
+   8. FOOTER
+   ============================================================ */
+#footer {
+  background: var(--true-black);
+  padding: 5rem 4vw 2rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 1.2fr;
+  gap: 4rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.footer-brand .nav-logo {
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+.footer-brand p {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 1rem;
+}
+.footer-socials a {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  transition: border-color 0.2s, color 0.2s;
+}
+.footer-socials a:hover {
+  border-color: var(--acid-yellow);
+  color: var(--acid-yellow);
+}
+
+.footer-nav-col h4,
+.footer-location h4 {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 1.25rem;
+}
+.footer-nav-col ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.footer-nav-col a {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.5);
+  transition: color 0.2s;
+}
+.footer-nav-col a:hover { color: var(--acid-yellow); }
+
+.footer-location p {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 0.4rem;
+  line-height: 1.6;
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 2rem;
+}
+.footer-bottom-left {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.25);
+  line-height: 1.6;
+}
+.footer-bottom-right {
+  display: flex;
+  gap: 1.5rem;
+}
+.footer-bottom-right a {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.25);
+  transition: color 0.2s;
+}
+.footer-bottom-right a:hover { color: var(--acid-yellow); }
+
+.footer-dots {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  justify-content: center;
+  padding-top: 1.5rem;
+}
+.footer-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* ============================================================
+   9. SHARED UI COMPONENTS
+   ============================================================ */
+
+/* Dot accents */
+.dot-yellow { background: var(--acid-yellow); }
+.dot-pink   { background: var(--hot-pink); }
+.dot-blue   { background: var(--electric-blue); }
+
+/* Section eyebrow label */
+.section-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--hot-pink);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+/* Section title */
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  color: var(--white);
+}
+.section-title .yellow { color: var(--acid-yellow); }
+.section-title .pink   { color: var(--hot-pink); }
+.section-title .blue   { color: var(--electric-blue); }
+
+/* Primary CTA button */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--acid-yellow);
+  color: var(--true-black);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.9rem 1.8rem;
+  border-radius: var(--radius-lg);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+.btn-primary:hover {
+  background: var(--white);
+  transform: translateY(-2px);
+}
+
+/* Section container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 4vw;
+}
+
+/* ============================================================
+   10. RESPONSIVE — shared breakpoints
+   ============================================================ */
+@media (max-width: 900px) {
+  .nav-mid    { display: none; }
+  .nav-right  { display: none; }
+  .nav-hamburger { display: flex; }
+  #site-nav { grid-template-columns: auto 1fr auto; }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
