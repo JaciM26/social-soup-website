@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Feed | Social Soup — Creator Trends, Insights &amp; Campaign Stories</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <meta name="description" content="Creator trends, industry insights and campaign stories from Social Soup — Australia's leading community-driven influencer marketing agency.">
+  <link rel="canonical" href="https://socialsoup.com/the-feed">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    /* ── TOKENS ── */
+    :root {
+      --acid-yellow: #D4FF00;
+      --hot-pink:    #FF2D9C;
+      --electric-blue: #00D4FF;
+      --true-black:  #000000;
+      --off-white:   #F5F5F0;
+      --white:       #FFFFFF;
+      --muted-grey:  #555555;
+      --surface:     #0d0d0d;
+      --surface-2:   #141414;
+      --border:      rgba(255,255,255,0.07);
+      --font-display: 'Bebas Neue', 'Anton', sans-serif;
+      --font-body:    'DM Sans', 'Manrope', sans-serif;
+    }
+
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--true-black);
+      color: var(--white);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ── NAV ── */
+    nav#site-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw;
+      height: 68px;
+      background: rgba(0,0,0,0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo img { height: 28px; width: auto; display: block; }
+    .nav-links {
+      display: flex; gap: 2rem; list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      font-family: var(--font-body); font-size: 0.82rem;
+      font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--acid-yellow); }
+    .nav-links .nav-cta {
+      border: 1.5px solid var(--acid-yellow); color: var(--acid-yellow);
+      padding: 0.42rem 1.1rem; border-radius: 100px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-links .nav-cta:hover { background: var(--acid-yellow); color: var(--true-black); }
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px; background: none;
+      border: none; cursor: pointer; padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--white); border-radius: 2px; transition: all 0.3s;
+    }
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+
+    /* ── BLOG HERO ── */
+    .blog-hero {
+      padding: 140px 5vw 64px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    .blog-hero::before {
+      content: '';
+      position: absolute;
+      top: -40%; left: -10%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(212,255,0,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .blog-hero-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 2rem; flex-wrap: wrap;
+    }
+    .blog-hero-text {}
+    .blog-hero-eyebrow {
+      font-family: var(--font-body); font-size: 0.72rem;
+      font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--acid-yellow); margin-bottom: 0.75rem;
+    }
+    .blog-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(64px, 9vw, 120px);
+      line-height: 0.92;
+      letter-spacing: 0.01em;
+      color: var(--white);
+    }
+    .blog-hero-title span { color: var(--acid-yellow); }
+    .blog-hero-sub {
+      margin-top: 1.25rem;
+      font-size: 1rem; font-weight: 400;
+      color: rgba(255,255,255,0.55);
+      max-width: 460px; line-height: 1.65;
+    }
+    .blog-hero-stats {
+      display: flex; gap: 2.5rem; flex-shrink: 0;
+    }
+    .blog-stat-item { text-align: right; }
+    .blog-stat-num {
+      font-family: var(--font-display);
+      font-size: 2.8rem; line-height: 1;
+      color: var(--acid-yellow);
+    }
+    .blog-stat-label {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.4);
+      margin-top: 0.2rem;
+    }
+
+    /* ── ANIMATED TICKER (matches main site) ── */
+    .ticker-band {
+      background: var(--acid-yellow);
+      padding: 0.6rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .ticker-track {
+      display: inline-flex; gap: 0;
+      animation: tickerScroll 28s linear infinite;
+    }
+    @keyframes tickerScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .ticker-item {
+      font-family: var(--font-body); font-size: 0.7rem;
+      font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--true-black); padding: 0 1.8rem;
+    }
+    .ticker-dot { margin-right: 0.5rem; opacity: 0.5; }
+
+    /* ── CATEGORY FILTER ── */
+    .blog-filter-wrap {
+      padding: 2.5rem 5vw;
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 68px; z-index: 50;
+      background: rgba(0,0,0,0.9);
+      backdrop-filter: blur(12px);
+    }
+    .blog-filter {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center;
+    }
+    .filter-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(255,255,255,0.3);
+      margin-right: 0.6rem;
+    }
+    .filter-btn {
+      font-family: var(--font-body); font-size: 0.75rem;
+      font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.45rem 1.1rem; border-radius: 100px;
+      border: 1.5px solid rgba(255,255,255,0.14);
+      background: transparent; color: rgba(255,255,255,0.6);
+      cursor: pointer; transition: all 0.2s;
+    }
+    .filter-btn:hover {
+      border-color: rgba(255,255,255,0.35);
+      color: var(--white);
+    }
+    .filter-btn.is-active {
+      background: var(--acid-yellow);
+      border-color: var(--acid-yellow);
+      color: var(--true-black);
+    }
+    .filter-btn[data-cat="creator-trends"].is-active  { background: var(--hot-pink); border-color: var(--hot-pink); color: #fff; }
+    .filter-btn[data-cat="case-studies"].is-active    { background: var(--electric-blue); border-color: var(--electric-blue); color: var(--true-black); }
+    .filter-btn[data-cat="industry-insights"].is-active { background: var(--acid-yellow); border-color: var(--acid-yellow); color: var(--true-black); }
+
+    /* ── MAIN CONTENT ── */
+    .blog-main {
+      max-width: 1200px; margin: 0 auto;
+      padding: 4rem 5vw 6rem;
+    }
+
+    /* ── FEATURED POST ── */
+    .featured-post {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 5rem;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+    }
+    .featured-post:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 60px rgba(212,255,0,0.12);
+    }
+    .featured-img {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: var(--surface-2);
+    }
+    .featured-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .featured-post:hover .featured-img img { transform: scale(1.04); }
+    .featured-cat-badge {
+      position: absolute; top: 1.25rem; left: 1.25rem;
+      font-size: 0.65rem; font-weight: 800; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 0.32rem 0.8rem;
+      border-radius: 100px;
+    }
+    .featured-body {
+      background: var(--surface-2);
+      padding: 3rem;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .featured-label {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--acid-yellow);
+      margin-bottom: 1rem;
+    }
+    .featured-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3.2vw, 44px);
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 1.25rem;
+    }
+    .featured-excerpt {
+      font-size: 0.95rem; line-height: 1.7;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 2rem;
+      flex-grow: 1;
+    }
+    .featured-meta {
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .meta-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--hot-pink), var(--electric-blue));
+      flex-shrink: 0;
+    }
+    .meta-info {}
+    .meta-author { font-size: 0.8rem; font-weight: 700; color: var(--white); }
+    .meta-date   { font-size: 0.72rem; color: rgba(255,255,255,0.35); margin-top: 0.1rem; }
+    .featured-read-cta {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--acid-yellow);
+      margin-top: 1.5rem;
+    }
+    .featured-read-cta svg { transition: transform 0.2s; }
+    .featured-post:hover .featured-read-cta svg { transform: translateX(4px); }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      display: flex; align-items: baseline; justify-content: space-between;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: 2rem; letter-spacing: 0.03em; color: var(--white);
+    }
+    .section-count {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.3);
+    }
+
+    /* ── POST GRID ── */
+    .post-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+      margin-bottom: 4rem;
+    }
+    @media (max-width: 900px) { .post-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 580px) { .post-grid { grid-template-columns: 1fr; } }
+
+    /* ── POST CARD ── */
+    .post-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s;
+      display: flex; flex-direction: column;
+    }
+    .post-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+      border-color: rgba(255,255,255,0.15);
+    }
+    .post-card-img {
+      position: relative;
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      background: #1a1a1a;
+    }
+    .post-card-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .post-card:hover .post-card-img img { transform: scale(1.06); }
+    .post-cat-pill {
+      position: absolute; top: 0.85rem; left: 0.85rem;
+      font-size: 0.6rem; font-weight: 800; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 0.28rem 0.7rem;
+      border-radius: 100px;
+    }
+    /* Category colour coding */
+    .cat-creator    { background: rgba(255,45,156,0.18); color: var(--hot-pink); border: 1px solid rgba(255,45,156,0.35); }
+    .cat-case       { background: rgba(0,212,255,0.15); color: var(--electric-blue); border: 1px solid rgba(0,212,255,0.3); }
+    .cat-insights   { background: rgba(212,255,0,0.14); color: var(--acid-yellow); border: 1px solid rgba(212,255,0,0.3); }
+
+    .post-card-body {
+      padding: 1.4rem 1.5rem 1.6rem;
+      display: flex; flex-direction: column; flex-grow: 1;
+    }
+    .post-card-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem; line-height: 1.1;
+      color: var(--white); margin-bottom: 0.75rem;
+      transition: color 0.2s;
+    }
+    .post-card:hover .post-card-title { color: var(--acid-yellow); }
+    .post-card-excerpt {
+      font-size: 0.83rem; line-height: 1.65;
+      color: rgba(255,255,255,0.45);
+      flex-grow: 1; margin-bottom: 1.25rem;
+    }
+    .post-card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .post-card-date {
+      font-size: 0.7rem; color: rgba(255,255,255,0.3);
+      font-weight: 500; letter-spacing: 0.04em;
+    }
+    .post-card-read {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(255,255,255,0.4);
+      display: flex; align-items: center; gap: 0.3rem;
+      transition: color 0.2s;
+    }
+    .post-card:hover .post-card-read { color: var(--acid-yellow); }
+
+    /* ── LOAD MORE ── */
+    .load-more-wrap {
+      text-align: center; padding: 1rem 0 2rem;
+    }
+    .load-more-btn {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: var(--font-body); font-size: 0.8rem;
+      font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.9rem 2.2rem; border-radius: 100px;
+      border: 1.5px solid rgba(255,255,255,0.18);
+      background: transparent; color: rgba(255,255,255,0.7);
+      cursor: pointer; transition: all 0.25s;
+    }
+    .load-more-btn:hover {
+      border-color: var(--acid-yellow);
+      color: var(--acid-yellow);
+    }
+
+    /* ── NEWSLETTER BAND ── */
+    .newsletter-band {
+      background: var(--acid-yellow);
+      padding: 5rem 5vw;
+    }
+    .newsletter-inner {
+      max-width: 760px; margin: 0 auto; text-align: center;
+    }
+    .newsletter-eyebrow {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: rgba(0,0,0,0.5);
+      margin-bottom: 0.75rem;
+    }
+    .newsletter-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 60px);
+      line-height: 1; color: var(--true-black);
+      margin-bottom: 1rem;
+    }
+    .newsletter-sub {
+      font-size: 1rem; color: rgba(0,0,0,0.6);
+      line-height: 1.6; margin-bottom: 2.5rem;
+    }
+    .newsletter-form {
+      display: flex; gap: 0.75rem; max-width: 480px; margin: 0 auto;
+    }
+    .newsletter-input {
+      flex: 1; padding: 0.85rem 1.25rem;
+      border-radius: 100px; border: 1.5px solid rgba(0,0,0,0.2);
+      background: rgba(255,255,255,0.5);
+      font-family: var(--font-body); font-size: 0.9rem;
+      color: var(--true-black);
+      outline: none; transition: background 0.2s, border-color 0.2s;
+    }
+    .newsletter-input::placeholder { color: rgba(0,0,0,0.4); }
+    .newsletter-input:focus { background: rgba(255,255,255,0.8); border-color: var(--true-black); }
+    .newsletter-submit {
+      padding: 0.85rem 1.75rem; border-radius: 100px;
+      background: var(--true-black); color: var(--acid-yellow);
+      font-family: var(--font-body); font-size: 0.8rem;
+      font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+      border: none; cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      white-space: nowrap;
+    }
+    .newsletter-submit:hover { background: #1a1a1a; transform: scale(1.03); }
+    @media (max-width: 480px) {
+      .newsletter-form { flex-direction: column; }
+      .newsletter-submit { border-radius: 100px; }
+    }
+
+    /* ── FOOTER ── */
+    footer#footer {
+      background: #080808;
+      border-top: 1px solid var(--border);
+      padding: 5rem 5vw 3rem;
+    }
+    .footer-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+    @media (max-width: 860px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+    .footer-brand-tagline {
+      font-size: 0.82rem; color: rgba(255,255,255,0.35);
+      line-height: 1.6; margin-top: 1rem; max-width: 240px;
+    }
+    .footer-col-heading {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(255,255,255,0.3);
+      margin-bottom: 1.2rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .footer-col ul a {
+      font-size: 0.85rem; color: rgba(255,255,255,0.55);
+      transition: color 0.2s;
+    }
+    .footer-col ul a:hover { color: var(--acid-yellow); }
+    .footer-bottom {
+      max-width: 1200px; margin: 2rem auto 0;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-copy {
+      font-size: 0.75rem; color: rgba(255,255,255,0.22);
+    }
+    .footer-legal {
+      display: flex; gap: 1.5rem;
+    }
+    .footer-legal a {
+      font-size: 0.75rem; color: rgba(255,255,255,0.22);
+      transition: color 0.2s;
+    }
+    .footer-legal a:hover { color: rgba(255,255,255,0.55); }
+
+    /* ── HIDDEN FOR FILTER ── */
+    .post-card[data-hidden="true"],
+    .featured-post[data-hidden="true"] {
+      display: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .featured-post { grid-template-columns: 1fr; }
+      .featured-img  { aspect-ratio: 16/9; }
+      .featured-body { padding: 2rem; }
+      .blog-hero-stats { display: none; }
+    }
+    @media (max-width: 580px) {
+      .blog-hero { padding: 120px 5vw 48px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav id="site-nav" aria-label="Main navigation">
+    <!-- Logo -->
+    <a href="homepage.html" class="nav-logo" aria-label="Social Soup — Home"><img src="ss-logo-white.png" alt="Social Soup" height="28" style="display:block; width:auto;"></a>
+
+    <!-- Centre: links + divider + audience pills -->
+    <div class="nav-mid">
+      <ul class="nav-links" role="list">
+        <li><a href="the-menu.html">The Menu</a></li>
+        <li><a href="the-recipe.html">The Recipe</a></li>
+        <li><a href="the-feed.html">The Feed</a></li>
+        <li><a href="#">Intelligence</a></li>
+        <li><a href="about-us.html">About Us</a></li>
+      </ul>
+      <div class="nav-div" aria-hidden="true"></div>
+      <div class="nav-pills" aria-hidden="true">
+        <a href="community.html" class="nav-pill pill-co">Join Community</a>
+        <a href="creators.html" class="nav-pill pill-cr">Creators</a>
+        <span class="nav-pill pill-br">Brands</span>
+      </div>
+    </div>
+
+    <!-- Right: contact icon -->
+    <div class="nav-right">
+      <a href="#get-in-touch" class="nav-contact-icon" aria-label="Contact us">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <path d="m2 7 10 7 10-7"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle mobile menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile fullscreen menu -->
+  <nav class="nav-mobile" id="nav-mobile" aria-label="Mobile navigation">
+    <a href="the-menu.html"   onclick="closeMobile()">The Menu</a>
+    <a href="the-recipe.html" onclick="closeMobile()">The Recipe</a>
+    <a href="the-feed.html"   onclick="closeMobile()">The Feed</a>
+    <a href="#"               onclick="closeMobile()">Intelligence</a>
+    <a href="about-us.html"   onclick="closeMobile()">About Us</a>
+    <a href="#get-in-touch"   onclick="closeMobile()">Start a Campaign</a>
+  </nav>
+
+  <!-- ── BLOG HERO ── -->
+  <section class="blog-hero">
+    <div class="blog-hero-inner">
+      <div class="blog-hero-text">
+        <p class="blog-hero-eyebrow">Social Soup · Perspectives</p>
+        <h1 class="blog-hero-title">THE<br><span>FEED</span></h1>
+        <p class="blog-hero-sub">Creator trends, industry insights and real campaign stories from the people who live inside community-led influence.</p>
+      </div>
+      <div class="blog-hero-stats">
+        <div class="blog-stat-item">
+          <div class="blog-stat-num">200K+</div>
+          <div class="blog-stat-label">Community members</div>
+        </div>
+        <div class="blog-stat-item">
+          <div class="blog-stat-num">18+</div>
+          <div class="blog-stat-label">Years in market</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TICKER ── -->
+  <div class="ticker-band" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="ticker-item"><span class="ticker-dot">·</span>Creator Trends.</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>Industry Insights.</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>Case Studies.</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>Real stories. Real results.</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>Community-led influence.</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>200,000+ brand fans.</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>18+ years building community.</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>Creator Trends.</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>Industry Insights.</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>Case Studies.</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>Real stories. Real results.</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>Community-led influence.</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>200,000+ brand fans.</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>18+ years building community.</span>
+    </div>
+  </div>
+
+  <!-- ── CATEGORY FILTER ── -->
+  <div class="blog-filter-wrap">
+    <div class="blog-filter">
+      <span class="filter-label">Filter</span>
+      <button class="filter-btn is-active" data-cat="all">All Posts</button>
+      <button class="filter-btn" data-cat="creator-trends">Creator Trends</button>
+      <button class="filter-btn" data-cat="case-studies">Case Studies</button>
+      <button class="filter-btn" data-cat="industry-insights">Industry Insights</button>
+    </div>
+  </div>
+
+  <!-- ── MAIN ── -->
+  <main class="blog-main">
+
+    <!-- FEATURED POST -->
+    <a class="featured-post" href="#" data-category="creator-trends" aria-label="Read featured post">
+      <div class="featured-img">
+        <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&q=80" alt="Creator filming content on phone" loading="eager">
+        <span class="featured-cat-badge cat-creator">Creator Trends</span>
+      </div>
+      <div class="featured-body">
+        <div>
+          <p class="featured-label">★ Featured · March 2026</p>
+          <h2 class="featured-title">Why Community-First Creator Marketing Is Winning in 2026</h2>
+          <p class="featured-excerpt">The shift has been seismic. Brands chasing reach are getting left behind by brands who invested in community. Here's what the data from 200,000+ brand fans is telling us — and why authentic community beats paid amplification every time.</p>
+        </div>
+        <div>
+          <div class="featured-meta">
+            <div class="meta-avatar"></div>
+            <div class="meta-info">
+              <div class="meta-author">Social Soup Team</div>
+              <div class="meta-date">12 March 2026 · 6 min read</div>
+            </div>
+          </div>
+          <div class="featured-read-cta">
+            Read the article
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- GRID SECTION HEADER -->
+    <div class="section-header">
+      <h2 class="section-heading">Latest Posts</h2>
+      <span class="section-count" id="post-count">9 articles</span>
+    </div>
+
+    <!-- POST GRID -->
+    <div class="post-grid" id="post-grid">
+
+      <!-- POST 1 — Creator Trends -->
+      <article class="post-card" data-category="creator-trends">
+        <div class="post-card-img">
+          <img src="https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?w=600&q=75" alt="Creator with phone" loading="lazy">
+          <span class="post-cat-pill cat-creator">Creator Trends</span>
+        </div>
+        <div class="post-card-body">
+          <h3 class="post-card-title">TikTok's Algorithm Shift: What It Means for Brand Fans</h3>
+          <p class="post-card-excerpt">The latest TikTok update is rewarding genuine community engagement over polished production. Here's how to adapt your creator strategy.</p>
+          <div class="post-card-footer">
+            <span class="post-card-date">5 Mar 2026 · 4 min</span>
+            <span class="post-card-read">Read
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <!-- POST 2 — Case Study -->
+      <article class="post-card" data-category="case-studies">
+        <div class="post-card-img">
+          <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=75" alt="Product sampling campaign" loading="lazy">
+          <span class="post-cat-pill cat-case">Case Study</span>
+        </div>
+        <div class="post-card-body">
+          <h3 class="post-card-title">How 19 Crimes Turned Brand Fans Into a Sales Machine</h3>
+          <p class="post-card-excerpt">A community of 4,200 brand fans. A 34% uplift in purchase intent. Here's the full breakdown of how authentic advocacy drove real retail results.</p>
+          <div class="post-card-footer">
+            <span class="post-card-date">28 Feb 2026 · 7 min</span>
+            <span class="post-card-read">Read
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <!-- POST 3 — Industry Insights -->
+      <article class="post-card" data-category="industry-insights">
+        <div class="post-card-img">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=75" alt="Marketing data and charts" loading="lazy">
+          <span class="post-cat-pill cat-insights">Industry Insights</span>
+        </div>
+        <div class="post-card-body">
+          <h3 class="post-card-title">The Micro-Creator Premium: Why Smaller Audiences Win Bigger</h3>
+          <p class="post-card-excerpt">The influencer industry's obsession with follower counts is costing brands money. The data on micro-creators tells a completely different story.</p>
+          <div class="post-card-footer">
+            <span class="post-card-date">20 Feb 2026 · 5 min</span>
+            <span class="post-card-read">Read
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <!-- POST 4 — Creator Trends -->
+      <article class="post-card" data-category="creator-trends">
+        <div class="post-card-img">
+          <img src="https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=600&q=75" alt="Instagram reels creation" loading="lazy">
+          <span class="post-cat-pill cat-creator">Creator Trends</span>
+        </div>
+        <div class="post-card-body">
+          <h3 class="post-card-title">Instagram Reels vs TikTok in 2026: The Real Performance Gap</h3>
+          <p class="post-card-excerpt">We analysed 600+ pieces of creator content across both platforms. The results will surprise you — and change how you brief your creators.</p>
+          <div class="post-card-footer">
+            <span class="post-card-date">14 Feb 2026 · 5 min</span>
+            <span class="post-card-read">Read
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <!-- POST 5 — Case Study -->
+      <article class="post-card" data-category="case-studies">
+        <div class="post-card-img">
+          <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&q=75" alt="Product launch campaign" loading="lazy">
+          <span class="post-cat-pill cat-case">Case Study</span>
+        </div>
+        <div class="post-card-body">
+          <h3 class="post-card-title">Safety Culture's Creator-Led Product Launch: 0 to 1M Views</h3>
+          <p class="post-card-excerpt">When Safety Culture launched its new platform feature, they skipped traditional media and went straight to community. The result was extraordinary.</p>
+          <div class="post-card-footer">
+            <span class="post-card-date">7 Feb 2026 · 6 min</span>
+            <span class="post-card-read">Read
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <!-- POST 6 — Industry Insights -->
+      <article class="post-card" data-category="industry-insights">
+        <div class="post-card-img">
+          <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=75" alt="Team strategy session" loading="lazy">
+          <span class="post-cat-pill cat-insights">Industry Insights</span>
+        </div>
+        <div class="post-card-body">
+          <h3 class="post-card-title">Measuring What Matters: Beyond Impressions and Reach</h3>
+          <p class="post-card-excerpt">Vanity metrics are the enemy of great influencer marketing. Here's the measurement framework Social Soup uses for every single campaign.</p>
+          <div class="post-card-footer">
+            <span class="post-card-date">31 Jan 2026 · 4 min</span>
+            <span class="post-card-read">Read
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <!-- POST 7 — Creator Trends -->
+      <article class="post-card" data-category="creator-trends">
+        <div class="post-card-img">
+          <img src="https://images.unsplash.com/photo-1573152143286-0c422b4d2175?w=600&q=75" alt="Creator content shoot" loading="lazy">
+          <span class="post-cat-pill cat-creator">Creator Trends</span>
+        </div>
+        <div class="post-card-body">
+          <h3 class="post-card-title">The Rise of the "Nano Creator" in Australian Marketing</h3>
+          <p class="post-card-excerpt">Under 5K followers. Hyper-local audiences. Conversion rates that put mega-influencers to shame. The nano creator moment is here.</p>
+          <div class="post-card-footer">
+            <span class="post-card-date">22 Jan 2026 · 3 min</span>
+            <span class="post-card-read">Read
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <!-- POST 8 — Case Study -->
+      <article class="post-card" data-category="case-studies">
+        <div class="post-card-img">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=75" alt="Food and beverage campaign" loading="lazy">
+          <span class="post-cat-pill cat-case">Case Study</span>
+        </div>
+        <div class="post-card-body">
+          <h3 class="post-card-title">From Trial to Advocacy: A FMCG Product Sampling Story</h3>
+          <p class="post-card-excerpt">Product sampling has been revolutionised by community. Here's how we turned 1,200 free products into 9,000 pieces of authentic social content.</p>
+          <div class="post-card-footer">
+            <span class="post-card-date">15 Jan 2026 · 5 min</span>
+            <span class="post-card-read">Read
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <!-- POST 9 — Industry Insights -->
+      <article class="post-card" data-category="industry-insights">
+        <div class="post-card-img">
+          <img src="https://images.unsplash.com/photo-1553484771-047a44eee27b?w=600&q=75" alt="Influencer marketing strategy" loading="lazy">
+          <span class="post-cat-pill cat-insights">Industry Insights</span>
+        </div>
+        <div class="post-card-body">
+          <h3 class="post-card-title">Why the Next Wave of Influencer Marketing Is Community Intelligence</h3>
+          <p class="post-card-excerpt">Data from your CRM tells you what happened. Data from a live community of brand fans tells you what's about to happen. That's the new frontier.</p>
+          <div class="post-card-footer">
+            <span class="post-card-date">8 Jan 2026 · 6 min</span>
+            <span class="post-card-read">Read
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /post-grid -->
+
+    <div class="load-more-wrap">
+      <button class="load-more-btn">
+        Load more articles
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+  </main>
+
+  <!-- ── NEWSLETTER ── -->
+  <section class="newsletter-band" aria-label="Newsletter signup">
+    <div class="newsletter-inner">
+      <p class="newsletter-eyebrow">Stay in the loop</p>
+      <h2 class="newsletter-title">GET THE FEED IN YOUR INBOX</h2>
+      <p class="newsletter-sub">Monthly trends, campaign breakdowns and creator insights — direct from Australia's leading community influence agency.</p>
+      <form class="newsletter-form" onsubmit="return false;">
+        <input class="newsletter-input" type="email" placeholder="your@email.com" aria-label="Email address">
+        <button class="newsletter-submit" type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer id="footer" role="contentinfo" aria-label="Site footer">
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <a href="homepage.html" class="nav-logo" aria-label="Social Soup — Home"><img src="ss-logo-white.png" alt="Social Soup" height="24" style="display:block; width:auto;"></a>
+        <p>The community-driven influence company.<br><em>Where real influence lives.</em></p>
+        <nav class="footer-socials" aria-label="Social media links">
+          <a href="https://www.instagram.com/socialsouphq/" target="_blank" rel="noopener noreferrer" aria-label="Social Soup on Instagram">IG</a>
+          <a href="https://www.linkedin.com/company/socialsouphq" target="_blank" rel="noopener noreferrer" aria-label="Social Soup on LinkedIn">LI</a>
+          <a href="https://www.tiktok.com/@socialsouphq" target="_blank" rel="noopener noreferrer" aria-label="Social Soup on TikTok">TT</a>
+        </nav>
+      </div>
+
+      <nav class="footer-nav-col" aria-label="Footer navigation">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="the-menu.html">The Menu</a></li>
+          <li><a href="the-recipe.html">The Recipe</a></li>
+          <li><a href="the-feed.html">The Feed</a></li>
+          <li><a href="about-us.html">About Us</a></li>
+          <li><a href="community.html">Join Community</a></li>
+          <li><a href="creators.html">Creators</a></li>
+          <li><a href="#get-in-touch">Get in Touch</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-location">
+        <h4>Location</h4>
+        <p>Level 1, 61–63 Great Buckingham St<br>Redfern, NSW 2016<br>Australia</p>
+        <p style="margin-top: 0.75rem;"><a href="mailto:projects@socialsoup.com" style="color: var(--acid-yellow);">projects@socialsoup.com</a></p>
+        <p style="margin-top: 1rem; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em;">Sydney Time</p>
+        <div id="sydney-time" aria-live="polite" aria-label="Current Sydney time">--:--:--</div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-bottom-left">
+        &copy; 2026 Social Soup. The community-driven influence company. Where real influence lives.<br>
+        <span style="margin-top: 0.3rem; display: block;">
+          B&amp;T Creator Agency of the Year 2025 &middot; AiMCO Award Winner &middot; Sydney &middot; Melbourne &middot; Australia
+        </span>
+      </p>
+      <nav class="footer-bottom-right" aria-label="Legal links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-conditions.html">Terms</a>
+      </nav>
+    </div>
+
+    <div class="footer-dots" aria-hidden="true">
+      <span class="dot-yellow"></span>
+      <span class="dot-pink"></span>
+      <span class="dot-blue"></span>
+    </div>
+
+  </footer>
+
+  <!-- ── FILTER JS ── -->
+  <script>
+    (function() {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const cards      = document.querySelectorAll('#post-grid .post-card');
+      const featuredPost = document.querySelector('.featured-post');
+      const countEl   = document.getElementById('post-count');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const cat = btn.dataset.cat;
+
+          // Update active button
+          filterBtns.forEach(b => b.classList.remove('is-active'));
+          btn.classList.add('is-active');
+
+          // Filter cards
+          let visible = 0;
+          cards.forEach(card => {
+            const match = cat === 'all' || card.dataset.category === cat;
+            card.setAttribute('data-hidden', match ? 'false' : 'true');
+            if (match) visible++;
+          });
+
+          // Hide/show featured post
+          if (featuredPost) {
+            const featuredMatch = cat === 'all' || featuredPost.dataset.category === cat;
+            featuredPost.setAttribute('data-hidden', featuredMatch ? 'false' : 'true');
+          }
+
+          // Update count
+          if (countEl) countEl.textContent = visible + (visible === 1 ? ' article' : ' articles');
+        });
+      });
+    })();
+  </script>
+
+  <script>
+    /* ── Active nav link highlighting ──────────────────────── */
+    (function() {
+      var path = window.location.pathname.split('/').pop() || 'homepage.html';
+      document.querySelectorAll('#site-nav .nav-links a').forEach(function(a) {
+        var href = a.getAttribute('href').split('/').pop();
+        if (href && href === path) a.classList.add('active');
+      });
+      document.querySelectorAll('#site-nav .nav-pill').forEach(function(a) {
+        var href = a.getAttribute ? a.getAttribute('href') : null;
+        if (href) {
+          var hp = href.split('/').pop();
+          if (hp && hp === path) a.classList.add('active');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
